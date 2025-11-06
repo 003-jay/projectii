@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import Welcome from "./Welcome.jsx";
 import Home from "./Home.jsx";
-import Practice from "./practice.jsx";
+import Practice from "./Practice.jsx";
 import Techpg from "./Techpg.jsx";
 import Musicpage from "./Musicpage.jsx";
 import Career from "./Career.jsx";

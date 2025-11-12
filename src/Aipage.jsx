@@ -102,6 +102,36 @@ function Aipage() {
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
+        
+        <motion.div 
+          className="absolute w-4 h-4 bg-blue-400/30 rounded-full"
+          animate={{ 
+            y: [0, -120, 0],
+            x: [0, 30, 0],
+            opacity: [0.3, 1, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity, delay: 0 }}
+          style={{ top: '70%', left: '15%' }}
+        />
+        <motion.div 
+          className="absolute w-6 h-6 bg-green-400/25 rounded-full"
+          animate={{ 
+            y: [0, -100, 0],
+            x: [0, -25, 0],
+            scale: [1, 1.4, 1]
+          }}
+          transition={{ duration: 5, repeat: Infinity, delay: 2 }}
+          style={{ top: '60%', right: '20%' }}
+        />
+        <motion.div 
+          className="absolute w-5 h-5 bg-purple-400/20 rounded-full"
+          animate={{ 
+            y: [0, -90, 0],
+            rotate: [0, 180, 0]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, delay: 4 }}
+          style={{ top: '80%', left: '70%' }}
+        />
         <div className="relative h-full flex items-center justify-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -116,7 +146,7 @@ function Aipage() {
               Dive into the world of artificial intelligence and machine learning
             </p>
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/practice')}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-white/30 hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
             >
               ← Back to Events
@@ -181,9 +211,9 @@ function Aipage() {
       </section>
 
       {/* Topics Section */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
+      <ScrollAnimationContainer direction="up" delay={0.3}>
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
               Workshop Topics
             </h2>
@@ -192,15 +222,20 @@ function Aipage() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden"
+                  className="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.03, 
+                    y: -8,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                  }}
                 >
                   <div className="h-48 overflow-hidden">
-                    <img
+                    <motion.img
                       src={topic.image}
                       alt={topic.title}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-6">
@@ -215,15 +250,14 @@ function Aipage() {
                 </motion.div>
               ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
 
      
-      <ScrollAnimationContainer direction="up" delay={0.8} >
+      <ScrollAnimationContainer direction="up" delay={0.4}>
         <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
               Workshop Schedule
             </h2>
@@ -232,8 +266,8 @@ function Aipage() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5,  delay: index * 0.1 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-slate-50 rounded-lg shadow-md p-6 flex items-start space-x-4"
                 >
                   <div className="shrink-0">
@@ -248,55 +282,156 @@ function Aipage() {
                 </motion.div>
               ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </section>
       </ScrollAnimationContainer>
 
       {/* Requirements Section */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
+      <ScrollAnimationContainer direction="up" delay={0.5}>
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
               What You'll Need
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {requirements.map((req, index) => (
-                <SlideIn key={index} direction="up" delay={index * 0.1}>
-                  <div className="text-center bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg--100 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                      {req.title}
-                    </h3>
-                    <p className="text-slate-600">{req.description}</p>
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="text-center bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                    <svg className="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                   </div>
-                </SlideIn>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                    {req.title}
+                  </h3>
+                  <p className="text-slate-600">{req.description}</p>
+                </motion.div>
               ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
 
       {/* CTA Section */}
-      <section className="py-16 bg-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FadeIn>
-            <h2 className="text-3xl font-bold text-white mb-8">
+      <ScrollAnimationContainer direction="up" delay={0.6}>
+        <section className="py-16 bg-slate-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2 
+              className="text-3xl font-bold text-white mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               Ready to Start Your AI Journey?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               Limited seats available. Register now to secure your spot in this transformative workshop.
-            </p>
-            <button className="inline-flex items-center px-8 py-3 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-              Register Now - ₦3,000
-            </button>
-          </FadeIn>
-        </div>
-      </section>
+            </motion.p>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
+
+      {/* AI Innovation Stats */}
+      <ScrollAnimationContainer direction="up" delay={0.7}>
+        <section className="bg-gradient-to-r from-slate-800 to-slate-900 py-16 relative overflow-hidden">
+          <motion.div 
+            className="absolute w-40 h-40 bg-slate-600/10 rounded-full blur-2xl"
+            animate={{ 
+              x: [0, 150, 0], 
+              y: [0, -80, 0],
+              rotate: [0, 360, 0]
+            }}
+            transition={{ duration: 16, repeat: Infinity }}
+            style={{ top: '10%', left: '5%' }}
+          />
+          
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-12">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-white mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                🤖 AI Workshop 🤖
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-slate-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Master the future of technology with hands-on AI training
+              </motion.p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: "6hrs", label: "Intensive Training", icon: "📚" },
+                { number: "3", label: "AI Topics", icon: "🧠" },
+                { number: "₦3K", label: "Workshop Fee", icon: "🎫" },
+                { number: "30", label: "Limited Seats", icon: "👥" }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                >
+                  <div className="text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-slate-400 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <p className="text-slate-300 text-lg mb-6">
+                Build real AI models and launch your tech career!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🐍 Python Training
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🧠 Neural Networks
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  📜 Certificate
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
     </div>
   );
 }

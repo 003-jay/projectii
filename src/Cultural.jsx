@@ -97,6 +97,36 @@ function Cultural() {
           />
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
+        
+        <motion.div 
+          className="absolute w-6 h-6 bg-yellow-400/30 rounded-full"
+          animate={{ 
+            y: [0, -130, 0],
+            x: [0, 40, 0],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ duration: 5, repeat: Infinity, delay: 0 }}
+          style={{ top: '70%', left: '18%' }}
+        />
+        <motion.div 
+          className="absolute w-8 h-8 bg-red-400/25 rounded-full"
+          animate={{ 
+            y: [0, -110, 0],
+            x: [0, -35, 0],
+            scale: [1, 1.3, 1]
+          }}
+          transition={{ duration: 6, repeat: Infinity, delay: 2 }}
+          style={{ top: '65%', right: '22%' }}
+        />
+        <motion.div 
+          className="absolute w-7 h-7 bg-green-400/20 rounded-full"
+          animate={{ 
+            y: [0, -95, 0],
+            rotate: [0, 270, 0]
+          }}
+          transition={{ duration: 4.5, repeat: Infinity, delay: 4 }}
+          style={{ top: '75%', left: '65%' }}
+        />
         <div className="relative h-full flex items-center justify-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -111,7 +141,7 @@ function Cultural() {
               A spectacular evening celebrating diversity through dance, music, and fashion.
             </p>
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/practice')}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-slate-600/30 hover:bg-slate-700/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-100 transition-colors"
             >
               ← Back to Events
@@ -164,13 +194,18 @@ function Cultural() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden"
+                  className="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.03, 
+                    y: -8,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                  }}
                 >
                   <div className="h-48 overflow-hidden">
-                    <img
+                    <motion.img
                       src={perf.image}
                       alt={perf.name}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-6">
@@ -229,7 +264,8 @@ function Cultural() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                  className="text-center bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
+                  whileHover={{ scale: 1.05, y: -5 }}
                 >
                   <div className="w-40 h-25 mx-auto mb-4 rounded-xl overflow-hidden">
                     <img 
@@ -248,22 +284,105 @@ function Cultural() {
           </ScrollAnimationContainer>
         </div>
       </section>
-      {/* CTA Section */}
-      <section className="py-16 bg-slate-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollAnimationContainer>
-            <h2 className="text-3xl font-bold text-white mb-8">
-              Celebrate Diversity!
-            </h2>
-            <p className="text-xl text-yellow-100 mb-8 max-w-2xl mx-auto">
-              Join us for a night of culture, connection, and creativity.
-            </p>
-            <button className="inline-flex items-center px-8 py-3 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-blue-600/40 hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 transition-colors">
-              Register as Guest
-            </button>
-          </ScrollAnimationContainer>
-        </div>
-      </section>
+      {/* Cultural Celebration Stats */}
+      <ScrollAnimationContainer direction="up" delay={0.8}>
+        <section className="bg-gradient-to-r from-slate-800 to-slate-900 py-16 relative overflow-hidden">
+          <motion.div 
+            className="absolute w-40 h-40 bg-slate-600/10 rounded-full blur-2xl"
+            animate={{ 
+              x: [0, 150, 0], 
+              y: [0, -80, 0],
+              rotate: [0, 360, 0]
+            }}
+            transition={{ duration: 14, repeat: Infinity }}
+            style={{ top: '10%', left: '5%' }}
+          />
+          <motion.div 
+            className="absolute w-32 h-32 bg-slate-500/15 rounded-full blur-xl"
+            animate={{ 
+              x: [0, -120, 0], 
+              y: [0, 50, 0],
+              rotate: [360, 0, 360]
+            }}
+            transition={{ duration: 11, repeat: Infinity, delay: 6 }}
+            style={{ bottom: '15%', right: '8%' }}
+          />
+          
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-12">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-white mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                🎆 Cultural Showcase 🎆
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-slate-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Celebrating diversity through dance, music, and fashion
+              </motion.p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: "15+", label: "Cultural Groups", icon: "🎭" },
+                { number: "3hrs", label: "Live Performances", icon: "🎵" },
+                { number: "₦1.5K", label: "Entry Fee", icon: "🎫" },
+                { number: "500+", label: "Attendees", icon: "🎉" }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                >
+                  <div className="text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-slate-400 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <p className="text-slate-300 text-lg mb-6">
+                Experience the rich tapestry of Nigerian culture in one spectacular night!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🎭 Traditional Dances
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🍲 Local Cuisine
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  👗 Fashion Show
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
     </div>
   );
 }

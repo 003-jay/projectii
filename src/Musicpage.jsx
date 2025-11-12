@@ -58,8 +58,10 @@ const schedule = [
 
 function Musicpage() {
   const navigate = useNavigate();
-  const goBack = () => navigate('/practice');
-  const handleRegister = () => navigate('/registerform');
+  const goBack = () => {
+    navigate('/practice');
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-b from-purple-50 to-purple-100">
       <Header />
@@ -73,6 +75,37 @@ function Musicpage() {
         <div className="absolute inset-0 bg-[url('/muscianbg1.jpg')] bg-cover bg-center bg-no-repeat">
           <div className="absolute inset-0 bg-black/40 opacity-75" />
         </div>
+        
+        <motion.div 
+          className="absolute w-6 h-6 bg-purple-400/30 rounded-full"
+          animate={{ 
+            y: [0, -100, 0],
+            opacity: [0.3, 1, 0.3],
+            scale: [1, 1.5, 1]
+          }}
+          transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+          style={{ top: '70%', left: '20%' }}
+        />
+        <motion.div 
+          className="absolute w-4 h-4 bg-pink-400/40 rounded-full"
+          animate={{ 
+            y: [0, -80, 0],
+            opacity: [0.2, 0.8, 0.2],
+            scale: [1, 1.3, 1]
+          }}
+          transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+          style={{ top: '60%', right: '25%' }}
+        />
+        <motion.div 
+          className="absolute w-5 h-5 bg-blue-400/35 rounded-full"
+          animate={{ 
+            y: [0, -90, 0],
+            opacity: [0.3, 0.9, 0.3],
+            scale: [1, 1.4, 1]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, delay: 2 }}
+          style={{ top: '80%', left: '70%' }}
+        />
         <div className="relative h-full flex items-center justify-center text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -86,12 +119,9 @@ function Musicpage() {
             <p className="text-xl md:text-2xl text-purple-100 mb-8">
               Discover Tomorrow's Stars Today
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <button onClick={goBack} className="px-6 py-3 bg-transparent border border-white/30 text-white rounded-lg font-medium hover:bg-white/5 transition">
                 Back
-              </button>
-              <button onClick={handleRegister} className="px-8 py-3 bg-slate-600/70 hover:bg-slate-700/80 text-white rounded-lg font-semibold transition-colors">
-                Get Your Tickets
               </button>
             </div>
           </motion.div>
@@ -157,13 +187,18 @@ function Musicpage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
-                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-center"
+                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-center group cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.03, 
+                    y: -8,
+                    backgroundColor: "rgba(255, 255, 255, 0.15)"
+                  }}
                 >
                   <div className="w-32 h-32 mx-auto mb-4 rounded-xl overflow-hidden">
-                    <img 
+                    <motion.img 
                       src={artist.image} 
                       alt={artist.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-2">
@@ -221,11 +256,11 @@ function Musicpage() {
             <p className="text-xl text-purple-100 mb-8">
               Get your tickets now and be part of this incredible musical journey
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={handleRegister} className="px-8 py-4 bg-white text-slate-600 rounded-lg font-semibold hover:bg-slate-100 transition-colors">
                 Buy Tickets Now
               </button>
-            </div>
+            </div> */}
           </div>
         </section>
       </ScrollAnimationContainer>
@@ -251,6 +286,106 @@ function Musicpage() {
                 <p className="text-slate-600">Early Bird: ₦1,500</p>
               </div>
             </div>
+          </div>
+        </section>
+      </ScrollAnimationContainer>
+
+      {/* Music Festival Vibe Section */}
+      <ScrollAnimationContainer direction="up" delay={0.7}>
+        <section className="bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 py-16 relative overflow-hidden">
+          <motion.div 
+            className="absolute w-40 h-40 bg-white/10 rounded-full blur-2xl"
+            animate={{ 
+              x: [0, 120, 0], 
+              y: [0, -60, 0],
+              rotate: [0, 360, 0]
+            }}
+            transition={{ duration: 12, repeat: Infinity }}
+            style={{ top: '15%', left: '10%' }}
+          />
+          <motion.div 
+            className="absolute w-32 h-32 bg-slate-400/20 rounded-full blur-xl"
+            animate={{ 
+              x: [0, -100, 0], 
+              y: [0, 40, 0],
+              rotate: [360, 0, 360]
+            }}
+            transition={{ duration: 10, repeat: Infinity, delay: 5 }}
+            style={{ bottom: '20%', right: '15%' }}
+          />
+          
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-12">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-white mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                🎵 Feel the Beat 🎵
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-slate-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Experience the energy of live campus music
+              </motion.p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: "3", label: "Live Bands", icon: "🎸" },
+                { number: "5hrs", label: "Non-Stop Music", icon: "🎶" },
+                { number: "₦2K", label: "Ticket Price", icon: "🎫" },
+                { number: "1000+", label: "Music Lovers", icon: "🎤" }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                >
+                  <div className="text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-slate-400 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <p className="text-slate-300 text-lg mb-6">
+                Get ready for the most electrifying night of the year!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🎵 Live Performances
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  🍕 Food & Drinks
+                </motion.div>
+                <motion.div 
+                  className="bg-slate-600/30 border border-slate-500/50 text-slate-300 px-6 py-3 rounded-full"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(71, 85, 105, 0.4)" }}
+                >
+                  📸 Photo Booths
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </section>
       </ScrollAnimationContainer>

@@ -17,6 +17,8 @@ import EventDetails from "./EventDetails.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 import ConfirmationPage from "./ConfirmationPage.jsx";
 import About from "./About.jsx";
+import PendingEvents from "./PendingEvents.jsx";
+import ManageEvents from "./ManageEvents.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -42,6 +44,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/registerform/:id" element={<RegisterForm />} />
 
         <Route path="/confirmationpage" element={<ConfirmationPage />} />
+        <Route path="/pendingevents" element={<PendingEvents />} />
+        <Route path="/manageevents" element={<ManageEvents />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

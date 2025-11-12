@@ -1,76 +1,116 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from './components/Header';
+import LoadingScreen from './components/LoadingScreen';
+import { useLoadingNavigation } from './hooks/useLoadingNavigation';
 
 function Welcome() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const { navigateWithLoading, isNavigating } = useLoadingNavigation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const next = () => {
-    navigate("/Home");
+    navigateWithLoading("/Home");
   };
 
   const container = {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const fadeUp = {
-    hidden: { y: 24, opacity: 0, scale: 0.98 },
-    show: { y: 0, opacity: 1, scale: 1, transition: { duration: 0.75, ease: [0.2, 0.8, 0.2, 1] } },
+    hidden: { y: 30, opacity: 0 },
+    show: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   return (
     <>
-      <Header />
+      <AnimatePresence>
+        {(isLoading || isNavigating) && <LoadingScreen />}
+      </AnimatePresence>
+      
+      {!isLoading && (
+        <>
+          <Header />
       <motion.div
-        className="min-h-screen relative flex flex-col items-center overflow-hidden justify-center bg-[url(campu.jpg)] bg-cover bg-no-repeat bg-center text-center text-white px-6"
+        className="min-h-screen relative flex flex-col items-center justify-center bg-slate-100 text-slate-900 px-6 overflow-hidden"
         initial="hidden"
         animate="show"
         variants={container}
       >
-      
-      <div className="absolute inset-0 bg-black/45 backdrop-blur-sm pointer-events-none" />
+        <div className="absolute inset-0 bg-[url(campu.jpg)] bg-cover bg-center opacity-50" />
+        <div className="absolute inset-0 bg-slate-100/60" />
 
-     
-      <motion.div
-        aria-hidden
-        className="absolute -left-20 -top-16 w-72 h-72 rounded-full bg-linear-to-br from-indigo-500/40 to-sky-400/30 blur-3xl"
-        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-      />
-      <motion.div
-        aria-hidden
-        className="absolute -right-24 bottom-24 w-56 h-56 rounded-full bg-linear-to-br from-rose-400/30 to-yellow-300/30 blur-3xl"
-        animate={{ y: [0, 18, 0], x: [0, -8, 0] }}
-        transition={{ duration: 7, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-      />
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 bg-slate-300/50 rounded-full blur-xl"
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-24 h-24 bg-slate-400/50 rounded-full blur-xl"
+          animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
 
-      <motion.div className="relative z-10 max-w-3xl mx-auto" variants={fadeUp}>
-        <motion.h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight" variants={fadeUp}>
-          Welcome to <span className=" text-4xl font-extrabold text-slate-400 mb-4 uppercase md:text-6xl">Bitxbase</span> Campus Events Hub
-        </motion.h1>
-        <motion.p className="text-lg md:text-xl mb-8 max-w-2xl text-slate-200" variants={fadeUp}>
-          Discover, share, and stay updated on the latest campus happenings — from academic seminars to social parties.
-        </motion.p>
+        <motion.div className="relative z-10 text-center max-w-4xl" variants={fadeUp}>
+          <motion.div className="mb-6" variants={fadeUp}>
+            <span className="inline-block px-4 py-2 bg-slate-200 rounded-full text-slate-600 text-sm font-medium border border-slate-300">
+              🎉 Your Campus Community Awaits
+            </span>
+          </motion.div>
+          
+          <motion.h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight" variants={fadeUp}>
+            Welcome to{' '}
+            <span className="text-slate-500 uppercase font-serif">
+              Bitxbase
+            </span>
+          </motion.h1>
+          
+          <motion.p className="text-xl md:text-2xl mb-8 text-slate-600 max-w-2xl mx-auto leading-relaxed" variants={fadeUp}>
+            Your ultimate hub for campus events, connections, and unforgettable experiences
+          </motion.p>
 
-        <motion.button
-          onClick={next}
-          className="relative z-20 inline-flex items-center justify-center bg-linear-to-r from-sky-500 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full shadow-xl focus:outline-none focus:ring-4 focus:ring-sky-300"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
+          <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center" variants={fadeUp}>
+            <motion.button
+              onClick={next}
+              className="bg-slate-700 hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-lg shadow-xl transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Explore Events →
+            </motion.button>
+            <motion.div className="text-slate-500 text-sm" variants={fadeUp}>
+              Join 2,000+ students already connected
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
           variants={fadeUp}
         >
-          Get Started
-        </motion.button>
+          <div className="text-slate-500 text-xs">Scroll to discover</div>
+          <div className="w-6 h-10 border-2 border-slate-500 rounded-full mx-auto mt-2 relative">
+            <div className="w-1 h-3 bg-slate-500 rounded-full mx-auto mt-2 animate-bounce"></div>
+          </div>
+        </motion.div>
       </motion.div>
-
-      
-      </motion.div>
+        </>
+      )}
     </>
   );
 }

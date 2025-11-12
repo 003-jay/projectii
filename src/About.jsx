@@ -240,7 +240,7 @@ export default function About() {
                   users to seamlessly schedule and manage ride bookings.
                 </p>
                 <a
-                  href="https://jluxebooking1.vercel.app/"
+                  href="https://jluxecar.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sky-600 hover:underline font-medium"
